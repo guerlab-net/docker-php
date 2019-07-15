@@ -1,0 +1,19 @@
+version: "2"
+services:
+  nginx:
+    container_name: nginx
+    image: guerlab/nginx
+    ports:
+      - 40080:80/tcp
+    links:
+      - php:php
+    volumes:
+      - ./index.php:/htdocs/index.php
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  php:
+    container_name: php
+    image: guerlab/php:test
+    expose:
+      - 9000/tcp
+    volumes:
+      - ./index.php:/htdocs/index.php
